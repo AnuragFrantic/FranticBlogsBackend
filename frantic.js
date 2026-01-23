@@ -92,15 +92,22 @@ const port = process.env.PORT || 5000;
 const allowedOrigins = [
     "http://localhost:3000",
     "https://frantic-blog.vercel.app",
-    "https://www.frantic.in/",
-    // Add your custom domain when you connect it:
-    // "https://blogs.frantic.in",
+    "https://frantic.in",
+    "https://www.frantic.in",
 ];
 
 // ✅ Middlewares
 app.use(
     cors({
-        origin: allowedOrigins,
+        origin: function (origin, callback) {
+            if (!origin) return callback(null, true);
+
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            } else {
+                return callback(new Error("Not allowed by CORS: " + origin));
+            }
+        },
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
         credentials: true,
     })
