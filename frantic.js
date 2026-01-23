@@ -92,6 +92,8 @@ const port = process.env.PORT || 5000;
 const allowedOrigins = [
     "http://localhost:3000",
     "https://frantic-blog.vercel.app",
+    "https://www.frantic.in/",
+    "https://frantic.in/"
     // Add your custom domain when you connect it:
     // "https://blogs.frantic.in",
 ];
